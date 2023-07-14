@@ -1,7 +1,27 @@
-import express from 'express';
+import express, { Application } from 'express';
+import { config } from 'dotenv';
 
-const app = express();
+config();
 
-const port = '3000'
+class App {
 
-app.listen(port, () => console.log(`Server is up on port ${port}`))
+	private router: Application;
+
+	constructor() {
+		this.router = express();
+		this.start();
+	}
+
+	public static main(): void {
+		new App();
+	}
+
+	private start(): void {
+		const PORT = process.env.PORT ?? '3000';
+
+		this.router.listen(PORT, () => console.log(`Server up on Port ${PORT}`));
+	}
+
+}
+
+App.main();
