@@ -6,7 +6,7 @@ export class GetAllUsersController implements IGetAllUsersController {
 	
 	constructor(private getAllUserRepository: IGetAllUsersRepository) {}
 
-	public async handle(): Promise<httpResponse<IUserOutput>> {
+	public async handle(): Promise<httpResponse<IUserOutput[]>> {
 		const result = await this.getAllUserRepository.getAllUser();
 
 		return {
