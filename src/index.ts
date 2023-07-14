@@ -3,6 +3,7 @@ import { config } from 'dotenv';
 import { GetAllUsersMongoRepository } from './repositories/get-all-users-repository/get-all-users-mongo-repository';
 import { GetAllUsersController } from './controllers/get-all-users/get-all-users';
 import { mongoDb } from './database/mongo';
+import { ErrorHandler } from './utils/ErrorHandler';
 
 config();
 
@@ -39,8 +40,8 @@ class App {
 				return res.status(status).json(body);
 
 			} catch (error) {
-				const e = error as Error;
-				return res.status(500).json(e.message);
+				const e = error as ErrorHandler;
+				return res.status(e.status).json({ msg: e.message});
 			}
 		});
 
