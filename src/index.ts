@@ -54,7 +54,9 @@ class App {
 				const createNewUserRepository = new CreateNewUserMongoRepository();
 				const createNewUserController = new CreateNewUserController(createNewUserRepository);
 
-				await createNewUserController.handle({params: req.params, body: req.body, headers: req.headers});
+				const { body: token, status } = await createNewUserController.handle({params: req.params, body: req.body, headers: req.headers});
+
+				return res.status(status).json({ token });
 
 			} catch (error) {
 				const e = error as ErrorHandler;
