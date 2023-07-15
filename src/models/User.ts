@@ -7,4 +7,4 @@ export interface IUser {
 
 export interface IUserOutput extends Omit<IUser, 'password'> {}
 
-export interface IUserInput extends Omit<IUserOutput, 'id'> {}
+export interface IUserInput extends Omit<IUser, 'id'> {}

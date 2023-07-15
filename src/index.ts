@@ -4,6 +4,9 @@ import { GetAllUsersMongoRepository } from './repositories/get-all-users-reposit
 import { GetAllUsersController } from './controllers/get-all-users/get-all-users';
 import { mongoDb } from './database/mongo';
 import { ErrorHandler } from './utils/ErrorHandler';
+import { IUserInput } from './models/User';
+import { CreateNewUserMongoRepository } from './repositories/create-new-user-repository/create-new-user-mongo-repository';
+import { CreateNewUserController } from './controllers/create-new-user/create-new-user';
 
 config();
 
@@ -38,6 +41,20 @@ class App {
 				const {body, status} = await getAllUsersController.handle();
 
 				return res.status(status).json(body);
+
+			} catch (error) {
+				const e = error as ErrorHandler;
+				return res.status(e.status).json({ msg: e.message});
+			}
+		});
+
+		this.router.post('/users', async (req: Request<unknown, unknown, IUserInput>, res: Response) => {
+
+			try {
+				const createNewUserRepository = new CreateNewUserMongoRepository();
+				const createNewUserController = new CreateNewUserController(createNewUserRepository);
+
+				await createNewUserController.handle({params: req.params, body: req.body, headers: req.headers});
 
 			} catch (error) {
 				const e = error as ErrorHandler;
