@@ -17,34 +17,36 @@ export class UpdateUserController implements IUpdateUserController {
 
 	async handle(params: httpRequest<IUserInput, string, unknown>): Promise<httpResponse<string>> {
 		
+		const body: contentOBJ = {};
+
 		if (params.body?.email) {
 			if (!validateEmail(params.body.email)) {
 				throw new ErrorHandler('Invalid email format', 401);
 			}
+			body.email = params.body.email;
 		}
 
 		if (params.body?.name) {
 			if (params.body.name.length < 1) {
 				throw new ErrorHandler('Name must be at least 4 characters long', 401);
 			}
+			body.name = params.body.name;
 		}
 
 		if (params.body?.password) {
 			if (params.body.password.length < 6){
 				throw new ErrorHandler('Password must be at least 6 characters long', 401);
 			}
+			const hash = params.body?.password && await passwordEncrypt(params.body?.password);
+			body.password = hash;
 		}
 
-		const hash = params.body?.password && await passwordEncrypt(params.body?.password);
+		
 
 		const result = await this.updateUserRepository.update({
 			params: params.params,
 			headers: params.headers,
-			body: {
-				email: params.body?.email,
-				name: params.body?.name,
-				password: hash != undefined ? hash : params.body?.password 
-			},
+			body
 		});
 
 		if (result === 'No users found') {
