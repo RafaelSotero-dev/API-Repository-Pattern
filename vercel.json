@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "build": [
+    {
+      "src": "./dist/index.js",
+      "use": "@varcel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "(.*)",
+      "dest": "./dist/index.js" 
+    }
+  ]
+}
