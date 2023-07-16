@@ -56,7 +56,7 @@ export class UpdateUserController implements IUpdateUserController {
 		}
 
 		return {
-			status: 204,
+			status: 200,
 			body: result
 		};
 	}

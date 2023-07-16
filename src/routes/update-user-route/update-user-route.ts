@@ -17,13 +17,13 @@ updateUserRoute.patch('/:id', async (req: Request<{ id: string }, unknown, conte
 			return res.status(400).json({ msg: 'Missing parameters' });
 		}
 
-		const {body, status} = await updateUserController.handle({
+		const {body: result, status} = await updateUserController.handle({
 			params: id,
 			headers: req.headers,
 			body: req.body as IUserInput
 		});
 
-		return res.status(status).json({ msg: body});
+		return res.status(status).json({ msg: result});
 	} catch (error) {
 		const e = error as ErrorHandler;
 		return res.status(e.status).json({ msg: e.message});
