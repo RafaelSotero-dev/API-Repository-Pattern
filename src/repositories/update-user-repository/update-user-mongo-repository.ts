@@ -15,7 +15,7 @@ export class UpdateUserMongoRepository implements IUpdateUserRepository {
 			return 'No users found';
 		}
 
-		const { modifiedCount } = await mongoDb.db.collection<Omit<IUser, 'id'>>('users').updateOne({ _id: id }, { $set: { ...params.body } });
+		const { modifiedCount } = await mongoDb.db.collection('users').updateOne({ _id: id }, { $set: { ...params.body } });
 
 		if (!modifiedCount) {
 			return 'No updates have been performed';
