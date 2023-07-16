@@ -4,6 +4,7 @@ import { mongoDb } from './database/mongo';
 import { getAllUsersRoute } from './routes/get-all-users-route/get-all-user-route';
 import { createNewUserRoute } from './routes/create-new-user-route/create-new-user-route';
 import { updateUserRoute } from './routes/update-user-route/update-user-route';
+import { deleteUserRoute } from './routes/delete-user-route/delete-user-route';
 
 config();
 
@@ -33,6 +34,7 @@ class App {
 		this.router.use('/users', getAllUsersRoute);
 		this.router.use('/users', createNewUserRoute);
 		this.router.use('/users', updateUserRoute);
+		this.router.use('/users', deleteUserRoute);
 	}
 
 	private start(): void {
