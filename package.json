@@ -4,9 +4,9 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "node .",
     "start:dev": "nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node src/index.ts'",
     "build": "npx tsc",
+    "postbuild": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
