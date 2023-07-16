@@ -2,14 +2,14 @@
   "version": 2,
   "build": [
     {
-      "src": "./dist/index.js",
+      "src": "src/index.ts",
       "use": "@varcel/node"
     }
   ],
   "routes": [
     {
       "src": "(.*)",
-      "dest": "./dist/index.js" 
+      "dest": "src/index.ts" 
     }
   ]
 }
