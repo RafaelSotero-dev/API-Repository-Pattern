@@ -6,7 +6,7 @@ import { IUserInput } from '../../models/User';
 
 export const createNewUserRoute = Router();
 
-createNewUserRoute.post('/users', async (req: Request<unknown, unknown, IUserInput>, res: Response) => {
+createNewUserRoute.post('/', async (req: Request<unknown, unknown, IUserInput>, res: Response) => {
 
 	try {
 		const createNewUserRepository = new CreateNewUserMongoRepository();
