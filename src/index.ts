@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express from 'express';
 import { config } from 'dotenv';
 import { mongoDb } from './database/mongo';
 import { getAllUsersRoute } from './routes/get-all-users-route/get-all-user-route';
@@ -8,12 +8,11 @@ import { deleteUserRoute } from './routes/delete-user-route/delete-user-route';
 
 config();
 
-class App {
+export class App {
 
-	private router: Application;
+	public static router = express();
 
 	constructor() {
-		this.router = express();
 		this.route();
 		this.start();
 	}
@@ -29,18 +28,18 @@ class App {
 	}
 
 	private route(): void {
-		this.router.use(express.json());
+		App.router.use(express.json());
 
-		this.router.use('/users', getAllUsersRoute);
-		this.router.use('/users', createNewUserRoute);
-		this.router.use('/users', updateUserRoute);
-		this.router.use('/users', deleteUserRoute);
+		App.router.use('/users', getAllUsersRoute);
+		App.router.use('/users', createNewUserRoute);
+		App.router.use('/users', updateUserRoute);
+		App.router.use('/users', deleteUserRoute);
 	}
 
 	private start(): void {
 		const PORT = process.env.PORT ?? '3000';
 
-		this.router.listen(PORT, () => console.log(`Server up on Port ${PORT}`));
+		App.router.listen(PORT, () => console.log(`Server up on Port ${PORT}`));
 	}
 
 }
