@@ -3,8 +3,8 @@ export interface httpResponse<T> {
   body: T | string 
 }
 
-export interface httpRequest<T> {
-  params?: string | unknown,
-  body?: T,
-  headers?: string | unknown
+export interface httpRequest<B, P, H> {
+  params?: P
+  body?: B
+  headers?: H
 }
