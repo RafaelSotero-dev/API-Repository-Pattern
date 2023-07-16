@@ -1,6 +1,6 @@
 import { IUserInput } from '../../models/User';
 import { httpRequest, httpResponse } from '../protocols';
-import { contentOBJ } from './update-user-controller';
+import { contentOBJ } from './update-user';
 
 export interface IUpdateUserController {
   handle(params: httpRequest<IUserInput, string, unknown>): Promise<httpResponse<string>>

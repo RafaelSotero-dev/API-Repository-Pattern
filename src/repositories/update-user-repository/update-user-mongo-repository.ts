@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { httpRequest } from '../../controllers/protocols';
 import { IUpdateUserRepository } from '../../controllers/update-user/protocols';
-import { contentOBJ } from '../../controllers/update-user/update-user-controller';
+import { contentOBJ } from '../../controllers/update-user/update-user';
 import { mongoDb } from '../../database/mongo';
 import { IUser } from '../../models/User';
 
