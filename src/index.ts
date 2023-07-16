@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Application } from 'express';
 import { config } from 'dotenv';
 import { mongoDb } from './database/mongo';
 import { getAllUsersRoute } from './routes/get-all-users-route/get-all-user-route';
@@ -10,9 +10,10 @@ config();
 
 export class App {
 
-	public static router = express();
+	public router: Application;
 
 	constructor() {
+		this.router = express();
 		this.route();
 		this.start();
 	}
@@ -28,18 +29,18 @@ export class App {
 	}
 
 	private route(): void {
-		App.router.use(express.json());
+		this.router.use(express.json());
 
-		App.router.use('/users', getAllUsersRoute);
-		App.router.use('/users', createNewUserRoute);
-		App.router.use('/users', updateUserRoute);
-		App.router.use('/users', deleteUserRoute);
+		this.router.use('/users', getAllUsersRoute);
+		this.router.use('/users', createNewUserRoute);
+		this.router.use('/users', updateUserRoute);
+		this.router.use('/users', deleteUserRoute);
 	}
 
 	private start(): void {
 		const PORT = process.env.PORT ?? '3000';
 
-		App.router.listen(PORT, () => console.log(`Server up on Port ${PORT}`));
+		this.router.listen(PORT, () => console.log(`Server up on Port ${PORT}`));
 	}
 
 }
